@@ -36,6 +36,7 @@
 
 # Ignore production envs
 /.env
+/.env.local
 
 # Ignore dartsass builds
 app/assets/builds/*

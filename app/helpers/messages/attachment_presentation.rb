@@ -5,7 +5,9 @@ class Messages::AttachmentPresentation
 
   def render
     if message.attachment.attached?
-      if message.attachment.previewable? || message.attachment.variable?
+      if message.attachment.audio?
+        audio_preview_tag
+      elsif message.attachment.previewable? || message.attachment.variable?
         render_preview
       else
         render_link
@@ -23,6 +25,10 @@ class Messages::AttachmentPresentation
       else
         lightboxed_image_preview_tag
       end
+    end
+
+    def audio_preview_tag
+      tag.audio src: rails_blob_path(message.attachment), controls: true, preload: :none, class: "message__attachment--audio"
     end
 
     def video_preview_tag
