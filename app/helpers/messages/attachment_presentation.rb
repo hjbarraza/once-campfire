@@ -28,8 +28,10 @@ class Messages::AttachmentPresentation
     end
 
     def audio_preview_tag
-      tag.audio src: rails_blob_path(message.attachment), controls: true, preload: :none,
-        data: { controller: "plyr" }
+      tag.div(class: "plyr-audio-wrapper") do
+        tag.audio src: rails_blob_path(message.attachment), controls: true, preload: :none,
+          data: { controller: "plyr" }
+      end
     end
 
     def video_preview_tag
